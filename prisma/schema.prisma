@@ -59,6 +59,12 @@ model Juries {
   @@unique([teacherId, soutenanceId])
 }
 
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+}
+
 // enum for sexe
 enum Sexe {
   HOMME
