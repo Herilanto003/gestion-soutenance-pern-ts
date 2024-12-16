@@ -49,7 +49,7 @@ export const updateStudent = async (req: Request, res: Response) => {
 export const deleteStudent = async (req: Request, res: Response) => {
   try {
     await studentService.deleteStudent(parseInt(req.params?.id));
-    res.status(204).json({
+    res.json({
       success: true,
     });
   } catch (error: any) {

@@ -1,7 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-// import { StudentInterface } from "../model/student.model";
 import { Students } from "@prisma/client";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 const prisma = new PrismaClient();
 
@@ -70,6 +68,12 @@ export const updateStudent = async (
       throw new Error("REGISTER_NUMBER_EXIST");
     }
 
+    const std = await prisma.students.findUnique({ where: { id } });
+
+    if (!std) {
+      throw new Error("STUDENT_DOES_NOT_EXIST");
+    }
+
     return await prisma.students.update({
       where: { id },
       data: student,
@@ -78,7 +82,9 @@ export const updateStudent = async (
     throw new Error(
       error.message === "REGISTER_NUMBER_EXIST"
         ? error.message
-        : "SERVER DISCONNECTED"
+        : error.message === "STUDENT_DOES_NOT_EXIST"
+        ? error.message
+        : "SERVER_ERROR"
     );
   }
 };
