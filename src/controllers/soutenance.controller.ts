@@ -56,3 +56,14 @@ export const deleteSoutenance = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const getJuriesInSoutenance = async (req: Request, res: Response) => {
+  try {
+    const juries = await soutenanceService.getJuriesInSoutenance(
+      parseInt(req.params?.id)
+    );
+    res.json(juries).status(200);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};

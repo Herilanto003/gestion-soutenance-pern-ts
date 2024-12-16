@@ -96,3 +96,18 @@ export const deleteSoutenance = async (id: number): Promise<Soutenances> => {
     );
   }
 };
+
+export const getJuriesInSoutenance = async (
+  id: number
+): Promise<Soutenances | null> => {
+  try {
+    return await prisma.soutenances.findUnique({
+      where: { id },
+      include: {
+        juries: true,
+      },
+    });
+  } catch (error: any) {
+    throw new Error("Failed to fetch juries in this soutenance");
+  }
+};
