@@ -37,14 +37,15 @@ model Teachers {
 }
 
 model Soutenances {
-  id        Int              @id @default(autoincrement())
-  date      DateTime?        @default(now())
-  hour      DateTime?
-  note      Float?
-  student   Students         @relation(fields: [studentId], references: [id])
-  studentId Int
-  juries    Juries[]
-  status    StatusSoutenance
+  id          Int              @id @default(autoincrement())
+  dateAndHour DateTime?        @default(now())
+  note        Float?
+  room        String
+  student     Students         @relation(fields: [studentId], references: [id])
+  studentId   Int
+  juries      Juries[]
+  status      StatusSoutenance
+  tag         Boolean
 }
 
 model Juries {
