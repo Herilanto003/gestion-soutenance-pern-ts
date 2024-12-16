@@ -55,6 +55,8 @@ model Juries {
   teacherId    Int
   soutenance   Soutenances @relation(fields: [soutenanceId], references: [id])
   soutenanceId Int
+
+  @@unique([teacherId, soutenanceId])
 }
 
 // enum for sexe
